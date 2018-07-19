@@ -7,7 +7,14 @@ const loadData = async () => {
     req = await axios.get('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-data.json');
     const dataset = req.data.data;
 
-    const svgWidth = 900,
+    const margin = {
+        top: 10,
+        right: 20,
+        bottom: 10,
+        left: 20
+    };
+    const
+        svgWidth = 900 + margin.left + margin.right,
         svgHeight = 500,
         barPadding = 0.1;
     const barwidth = svgWidth / dataset.length;
@@ -29,10 +36,10 @@ const loadData = async () => {
 
     // Add your code below this line
 
-    const yScale = d3.scaleLinear().domain([0, gdpMax]).range([0, svgHeight]);
+    const yScale = d3.scaleLinear().domain([0, gdpMax]).range([0, svgHeight - margin.top - margin.bottom]);
     const svg = d3.select("body")
         .append("svg")
-        .attr("width", svgWidth)
+        .attr("width", svgWidth )
         .attr("height", svgHeight)
         .style("background", "pink")
 
@@ -41,8 +48,8 @@ const loadData = async () => {
         .data(dataset)
         .enter()
         .append("rect")
-        .attr("x", (d, i) => i * barwidth)
-        .attr("y", (d, i) => svgHeight - yScale(d[1]))
+        .attr("x", (d, i) => i * barwidth+ margin.left)
+        .attr("y", (d, i) => svgHeight  - margin.bottom - yScale(d[1]))
         .attr("width", barwidth - barPadding)
         .attr("height", (d) => yScale(d[1]))
         .attr("fill", "grey")
@@ -56,14 +63,14 @@ const loadData = async () => {
     xAxis = d3.axisBottom().scale(xAxisScale);
     yAxis = d3.axisLeft().scale(yAxisScale);
 
-   svg.append("g")
+    svg.append("g")
         .call(yAxis)
         .attr("id", "y-axis")
-        .attr("transform", "translate(50, 10)")
+        .attr("transform", "translate(20, 10)")
 
-    xAxisTranslate = svgHeight - 20;
+    xAxisTranslate = svgHeight - 10;
 
-   svg.append("g")
+    svg.append("g")
         .attr("transform", "translate(50, " + xAxisTranslate + ")")
         .call(xAxis)
 
