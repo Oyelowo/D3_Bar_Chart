@@ -17,7 +17,8 @@ const loadData = async() => {
     const barwidth = (svgWidth - margin.right - margin.left)/ dataset.length;
     // note: barwidth has to be greater than barPadding; Create an x and y scale
 
-    const years = dataset.map(d => d[0]);
+    const gpdDates = dataset.map(d => d[0]);
+    const gdpYears = gpdDates.map(d=>d.slice(0,4));
     const gdpData = dataset.map(d => d[1]);
 
     const gdpMin = d3.min(gdpData);
@@ -70,14 +71,13 @@ const loadData = async() => {
     xAxisScale = d3
         .scaleLinear()
         .domain([
-            d3.min(years),
-            d3.max(years)
+            d3.min(gdpYears),
+            d3.max(gdpYears)
         ])
         .range([barPadding, svgWidth - barPadding - margin.left -margin.right]);
 
     xAxis = d3
         .axisBottom()
-        .ticks("5")
         .scale(xAxisScale)
         .tickFormat(d3.format("d"));
     yAxis = d3
