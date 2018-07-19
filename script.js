@@ -46,7 +46,7 @@ const loadData = async () => {
         .attr("transform", (d,i)=>{
             let x=  i * barwidth;
             let y = svgHeight - yScale(d[1]);
-            return `translate(${x}, ${y})`;
+            return `translate(${x}, ${y})`; 
         })
         .attr("width", barwidth - barPadding)
         .attr("height", (d) => yScale(d[1]))
