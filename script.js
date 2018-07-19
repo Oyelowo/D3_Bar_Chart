@@ -8,8 +8,8 @@ const loadData = async() => {
     const margin = {
         top: 10,
         right: 20,
-        bottom: 15,
-        left: 20
+        bottom: 60,
+        left: 50
     };
     const svgWidth = 900 + margin.left + margin.right,
         svgHeight = 500,
@@ -31,7 +31,7 @@ const loadData = async() => {
             0, d3.max(dataset, (d) => d[0])
         ])
         .range([
-            barPadding, svgWidth - barPadding
+            barPadding, svgWidth - barPadding - margin.left-margin.right
         ]);
 
     // Add your code below this line
@@ -47,7 +47,7 @@ const loadData = async() => {
         .append("svg")
         .attr("width", svgWidth)
         .attr("height", svgHeight)
-        .style("background", "pink")
+        .style("background", "#eaeaea")
 
     const barChart = svg
         .selectAll("rect")
@@ -61,40 +61,42 @@ const loadData = async() => {
         .attr("y", (d, i) => svgHeight - margin.bottom - yScale(d[1]))
         .attr("width", barwidth - barPadding)
         .attr("height", (d) => yScale(d[1]))
-        .attr("fill", "grey")
-        .on("mouseover")
+        .attr("fill", "lightgreen")
 
     yAxisScale = d3
         .scaleLinear()
         .domain([0, gdpMax])
-        .range([svgHeight, 0]);
+        .range([svgHeight-margin.top-margin.bottom, 0]);
     xAxisScale = d3
         .scaleLinear()
         .domain([
             d3.min(years),
             d3.max(years)
         ])
-        .range([0, svgWidth]);
+        .range([barPadding, svgWidth - barPadding - margin.left]);
 
     xAxis = d3
         .axisBottom()
-        .scale(xAxisScale);
+        .ticks("5")
+        .scale(xAxisScale)
+        .tickFormat(d3.format("d"));
     yAxis = d3
         .axisLeft()
+        .ticks("10")
         .scale(yAxisScale);
 
     svg
         .append("g")
         .call(yAxis)
         .attr("id", "y-axis")
-        .attr("transform", "translate(20, 10)")
+        .attr("transform", `translate(${margin.left}, ${margin.top})`)
 
-    xAxisTranslate = svgHeight - 10;
+    xAxisTranslate = svgHeight - margin.bottom;
 
     svg
         .append("g")
         .attr("id", "x-axis")
-        .attr("transform", "translate(50, " + xAxisTranslate + ")")
+        .attr("transform", `translate(${margin.left}, ${xAxisTranslate })`)
         .call(xAxis)
 
 }
