@@ -62,6 +62,7 @@ const loadData = async() => {
         .attr("width", barwidth - barPadding)
         .attr("height", (d) => yScale(d[1]))
         .attr("fill", "grey")
+        .on("mouseover")
 
     yAxisScale = d3
         .scaleLinear()
