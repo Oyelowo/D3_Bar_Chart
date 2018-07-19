@@ -6,16 +6,16 @@ const loadData = async() => {
     const dataset = req.data.data;
 
     const margin = {
-        top: 10,
+        top: 20,
         right: 20,
         bottom: 60,
         left: 50
     };
-    const svgWidth = 900 + margin.left + margin.right,
+    const svgWidth = 900,
         svgHeight = 500,
-        barPadding = 0.1;
-    const barwidth = svgWidth / dataset.length;
-    // not: barwidth has to be greater than barPadding; Create an x and y scale
+        barPadding = 0;
+    const barwidth = (svgWidth - margin.right - margin.left)/ dataset.length;
+    // note: barwidth has to be greater than barPadding; Create an x and y scale
 
     const years = dataset.map(d => d[0]);
     const gdpData = dataset.map(d => d[1]);
@@ -25,14 +25,14 @@ const loadData = async() => {
 
     // document.getElementById("demo").innerHTML=gdpMax;
 
-    const xScale = d3
-        .scaleLinear()
-        .domain([
-            0, d3.max(dataset, (d) => d[0])
-        ])
-        .range([
-            barPadding, svgWidth - barPadding - margin.left-margin.right
-        ]);
+    // const xScale = d3
+    //     .scaleLinear()
+    //     .domain([
+    //         0, d3.max(dataset, (d) => d[0])
+    //     ])
+    //     .range([
+    //         barPadding, svgWidth - barPadding - margin.left-margin.right
+    //     ]);
 
     // Add your code below this line
 
@@ -73,7 +73,7 @@ const loadData = async() => {
             d3.min(years),
             d3.max(years)
         ])
-        .range([barPadding, svgWidth - barPadding - margin.left]);
+        .range([barPadding, svgWidth - barPadding - margin.left -margin.right]);
 
     xAxis = d3
         .axisBottom()
