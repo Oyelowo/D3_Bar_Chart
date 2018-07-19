@@ -37,20 +37,35 @@ const loadData = async () => {
         .style("background", "pink")
 
 
-   const barChart= svg.selectAll("rect")
+    const barChart = svg.selectAll("rect")
         .data(dataset)
         .enter()
         .append("rect")
-        // .attr("x", (d, i) => i * barwidth)
-        // .attr("y", (d, i) => svgHeight - yScale(d[1]))
-        .attr("transform", (d,i)=>{
-            let x=  i * barwidth;
-            let y = svgHeight - yScale(d[1]);
-            return `translate(${x}, ${y})`; 
-        })
+        .attr("x", (d, i) => i * barwidth)
+        .attr("y", (d, i) => svgHeight - yScale(d[1]))
         .attr("width", barwidth - barPadding)
         .attr("height", (d) => yScale(d[1]))
         .attr("fill", "grey")
+
+
+    yAxisScale = d3.scaleLinear().domain([0, gdpMax]).range([svgHeight, 0]);
+    xAxisScale = d3.scaleLinear()
+        .domain([0, d3.max(years)])
+        .range([0, svgWidth]);
+
+    xAxis = d3.axisBottom().scale(xAxisScale);
+    yAxis = d3.axisLeft().scale(yAxisScale);
+
+   svg.append("g")
+        .call(yAxis)
+        .attr("id", "y-axis")
+        .attr("transform", "translate(50, 10)")
+
+    xAxisTranslate = svgHeight - 20;
+
+   svg.append("g")
+        .attr("transform", "translate(50, " + xAxisTranslate + ")")
+        .call(xAxis)
 
 }
 // let button = document.getElementById('button');
