@@ -59,7 +59,7 @@ const loadData = async() => {
         .attr("data-date", (d)=> d[0])
         .attr("data-gdp", (d)=> d[1])
         .attr("x", (d, i) => i * barwidth)
-        .attr("y", (d, i) => svgHeight- yScale(d[1]))
+        .attr("y", (d, i) => svgHeight - yScale(d[1]))
         .attr("width", barwidth - barPadding)
         .attr("height", (d) => yScale(d[1]))
         .attr("fill", "lightgreen")
@@ -83,7 +83,6 @@ const loadData = async() => {
         .tickFormat(d3.format("d"));
     yAxis = d3
         .axisLeft()
-        .ticks("10")
         .scale(yAxisScale);
 
     svg
