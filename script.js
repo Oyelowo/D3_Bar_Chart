@@ -8,7 +8,7 @@ const loadData = async() => {
     const margin = {
         top: 10,
         right: 20,
-        bottom: 10,
+        bottom: 15,
         left: 20
     };
     const svgWidth = 900 + margin.left + margin.right,
