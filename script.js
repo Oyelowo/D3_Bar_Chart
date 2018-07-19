@@ -55,7 +55,7 @@ const loadData = async() => {
         .enter()
         .append("rect")
         .attr("class", "bar")
-        .attr("data-date", (d)=> d[0].slice(0,4))
+        .attr("data-date", (d)=> d[0])
         .attr("data-gdp", (d)=> d[1])
         .attr("x", (d, i) => i * barwidth + margin.left)
         .attr("y", (d, i) => svgHeight - margin.bottom - yScale(d[1]))
