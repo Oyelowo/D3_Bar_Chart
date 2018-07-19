@@ -57,7 +57,7 @@ const loadData = async () => {
 
     yAxisScale = d3.scaleLinear().domain([0, gdpMax]).range([svgHeight, 0]);
     xAxisScale = d3.scaleLinear()
-        .domain([0, d3.max(years)])
+        .domain([d3.min(years), d3.max(years)])
         .range([0, svgWidth]);
 
     xAxis = d3.axisBottom().scale(xAxisScale);
