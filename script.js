@@ -6,7 +6,7 @@ const loadData = async() => {
     const dataset = req.data.data;
 
     const margin = {
-        top: 20,
+        top: 40,
         right: 20,
         bottom: 60,
         left: 50
@@ -48,7 +48,6 @@ const loadData = async() => {
         .data(dataset)
         .enter()
         .append("rect")
-        .attr("class", "bar")
         .attr("data-date", (d) => d[0])
         .attr("data-gdp", (d) => d[1])
         .attr("x", (d, i) => i * barwidth)
@@ -56,7 +55,9 @@ const loadData = async() => {
         .attr("width", barwidth - barPadding)
         .attr("height", (d) => yScale(d[1]))
         .attr("fill", "lightgreen")
+        .attr("class", "bar")
         .attr("transform", `translate(${margin.left},${ - margin.bottom})`)
+    
 
     yAxisScale = d3
         .scaleLinear()
