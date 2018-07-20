@@ -96,8 +96,6 @@ const loadData = async() => {
         .call(xAxis)
 
 }
-// let button = document.getElementById('button');
-// button.addEventListener("click", loadData)
 
 loadData()
 
