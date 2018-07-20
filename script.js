@@ -89,7 +89,7 @@ const loadData = async() => {
         .append("g")
         .call(yAxis)
         .attr("id", "y-axis")
-        .attr("transform", `translate(${margin.left}, ${-( margin.bottom)})`)
+        .attr("transform", `translate(${margin.left}, ${-margin.bottom})`)
 
     xAxisTranslate = svgHeight - margin.bottom;
 
