@@ -41,7 +41,7 @@ const loadData = async() => {
         .scaleLinear()
         .domain([0, gdpMax])
         .range([
-            0, svgHeight
+            0, svgHeight - margin.top - margin.bottom
         ]);
     const svg = d3
         .select("body")
@@ -68,7 +68,7 @@ const loadData = async() => {
     yAxisScale = d3
         .scaleLinear()
         .domain([0, gdpMax])
-        .range([svgHeight, 0]);
+        .range([svgHeight-margin.top-margin.bottom, 0]);
     xAxisScale = d3
         .scaleLinear()
         .domain([
@@ -89,7 +89,7 @@ const loadData = async() => {
         .append("g")
         .call(yAxis)
         .attr("id", "y-axis")
-        .attr("transform", `translate(${margin.left}, ${-margin.bottom})`)
+        .attr("transform", `translate(${margin.left}, ${margin.top})`)
 
     xAxisTranslate = svgHeight - margin.bottom;
 
