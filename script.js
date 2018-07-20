@@ -62,6 +62,7 @@ const loadData = async() => {
         .scaleLinear()
         .domain([0, gdpMax])
         .range([height, 0]);
+
     xAxisScale = d3
         .scaleLinear()
         .domain([
@@ -76,6 +77,7 @@ const loadData = async() => {
         .axisBottom()
         .scale(xAxisScale)
         .tickFormat(d3.format("d"));
+        
     yAxis = d3
         .axisLeft()
         .scale(yAxisScale);
