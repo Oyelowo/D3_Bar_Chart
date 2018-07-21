@@ -32,6 +32,7 @@ const loadData = async() => {
         .scaleLinear()
         .domain([0, gdpMax])
         .range([0, height]);
+        
     const svg = d3
         .select("#visBody")
         .append("svg")
