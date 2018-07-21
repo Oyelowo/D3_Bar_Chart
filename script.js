@@ -17,7 +17,7 @@ const loadData = async() => {
     const width = svgWidth - margin.left - margin.right;
     const height = svgHeight - margin.top - margin.bottom;
     const barwidth = (width) / dataset.length;
-    // note: barwidth has to be greater than barPadding; 
+    // note: barwidth has to be greater than barPadding;
 
     const gpdDates = dataset.map(d => d[0]);
     const gdpYears = gpdDates.map(d => d.slice(0, 4));
@@ -42,13 +42,13 @@ const loadData = async() => {
         .select("#visBody")
         .append('div')
         .attr("id", "tooltip")
-        .style("opacity", "0");
+        .style("opacity", 0);
 
     let barOverlay = d3
         .select("#visBody")
         .append("div")
         .attr("class", "barOverlay")
-        .style("opacity", "0");
+        .style("opacity", 0);
 
     const barChart = svg
         .selectAll("rect")
@@ -63,11 +63,24 @@ const loadData = async() => {
         .attr("height", (d) => yScale(d[1]))
         .attr("fill", "lightgreen")
         .attr("class", "bar")
-        .attr("transform", `translate(${margin.left},${margin.top})`);
+        .attr("transform", `translate(${margin.left},${margin.top})`)
+        .on("mouseover", function(d, i){
+            barOverlay
+                .transition()
+                .duration(0)
+                .style("opacity", 1)
+                .style("height", yScale(d[1]) + "px")
+                .style("width", barwidth + "px")
+                .style("top", (height - yScale(d[1])) + "px")
+                .style("left", (i * barwidth) + "px")
+                .style("transform", `translate(${margin.left}px, ${margin.top}px)`)
 
-    barChart.on("mouseover", (d) => {
-        barOverlay.transition()
-    })
+                // barOverlay.html(d[1])
+                // .style("left", (event.pageX) + "px")
+                // .style("top", (event.pageY) + "px")
+
+                // d3.select(this).style("opacity", 0.5)
+        })
 
     yAxisScale = d3
         .scaleLinear()

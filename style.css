@@ -15,10 +15,12 @@
   width: 20px;
   background: blue;
   color: white;
+  position: absolute;
 }
 
 .barOverlay{
-  background: white;
+  position: absolute;
+  background: red;
 }
 
 /* #y-axis path, #x-axis path{
