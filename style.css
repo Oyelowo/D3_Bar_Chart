@@ -1,7 +1,25 @@
-.bar:hover{
+/* .bar:hover {
   fill: white;
+} */
+
+#visContainer {
+  position: relative;
 }
 
+#visBody {
+  position: absolute;
+}
+
+#tooltip {
+  height: 30px;
+  width: 20px;
+  background: blue;
+  color: white;
+}
+
+.barOverlay{
+  background: white;
+}
 
 /* #y-axis path, #x-axis path{
     stroke: black;

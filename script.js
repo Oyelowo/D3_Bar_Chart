@@ -17,8 +17,7 @@ const loadData = async() => {
     const width = svgWidth - margin.left - margin.right;
     const height = svgHeight - margin.top - margin.bottom;
     const barwidth = (width) / dataset.length;
-
-    // note: barwidth has to be greater than barPadding; Create an x and y scale
+    // note: barwidth has to be greater than barPadding; 
 
     const gpdDates = dataset.map(d => d[0]);
     const gdpYears = gpdDates.map(d => d.slice(0, 4));
@@ -27,18 +26,29 @@ const loadData = async() => {
     const gdpMin = d3.min(gdpData);
     const gdpMax = d3.max(gdpData);
 
-
     const yScale = d3
         .scaleLinear()
         .domain([0, gdpMax])
         .range([0, height]);
-        
+
     const svg = d3
         .select("#visBody")
         .append("svg")
         .attr("width", svgWidth)
         .attr("height", svgHeight)
-        .style("background", "#eaeaea")
+        .style("background", "#eaeaea");
+
+    let tooltip = d3
+        .select("#visBody")
+        .append('div')
+        .attr("id", "tooltip")
+        .style("opacity", "0");
+
+    let barOverlay = d3
+        .select("#visBody")
+        .append("div")
+        .attr("class", "barOverlay")
+        .style("opacity", "0");
 
     const barChart = svg
         .selectAll("rect")
@@ -48,12 +58,16 @@ const loadData = async() => {
         .attr("data-date", (d) => d[0])
         .attr("data-gdp", (d) => d[1])
         .attr("x", (d, i) => i * barwidth)
-        .attr("y", (d, i) => height - yScale(d[1]))
+        .attr("y", (d) => height - yScale(d[1]))
         .attr("width", barwidth - barPadding)
         .attr("height", (d) => yScale(d[1]))
         .attr("fill", "lightgreen")
         .attr("class", "bar")
-        .attr("transform", `translate(${margin.left},${margin.top})`)
+        .attr("transform", `translate(${margin.left},${margin.top})`);
+
+    barChart.on("mouseover", (d) => {
+        barOverlay.transition()
+    })
 
     yAxisScale = d3
         .scaleLinear()
@@ -74,7 +88,7 @@ const loadData = async() => {
         .axisBottom()
         .scale(xAxisScale)
         .tickFormat(d3.format("d"));
-        
+
     yAxis = d3
         .axisLeft()
         .scale(yAxisScale);
