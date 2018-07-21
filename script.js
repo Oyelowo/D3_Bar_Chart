@@ -84,6 +84,8 @@ const loadData = async() => {
                 .style("left", (i * barwidth) + "px")
                 .style("transform", `translate(${60}px, ${-100}px)`);
 
+                tooltip.html("Tooltip")
+
 
            
                 // barOverlay.html(d[1])
