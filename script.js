@@ -27,17 +27,13 @@ const loadData = async() => {
     const gdpMin = d3.min(gdpData);
     const gdpMax = d3.max(gdpData);
 
-    // document.getElementById("demo").innerHTML=gdpMax; const xScale = d3
-    // .scaleLinear()     .domain([         0, d3.max(dataset, (d) => d[0])     ])
-    // .range([         barPadding, svgWidth - barPadding - margin.left-margin.right
-    //     ]); Add your code below this line
 
     const yScale = d3
         .scaleLinear()
         .domain([0, gdpMax])
         .range([0, height]);
     const svg = d3
-        .select("body")
+        .select("#visBody")
         .append("svg")
         .attr("width", svgWidth)
         .attr("height", svgHeight)
@@ -51,13 +47,12 @@ const loadData = async() => {
         .attr("data-date", (d) => d[0])
         .attr("data-gdp", (d) => d[1])
         .attr("x", (d, i) => i * barwidth)
-        .attr("y", (d, i) => svgHeight - yScale(d[1]))
+        .attr("y", (d, i) => height - yScale(d[1]))
         .attr("width", barwidth - barPadding)
         .attr("height", (d) => yScale(d[1]))
         .attr("fill", "lightgreen")
         .attr("class", "bar")
-        .attr("transform", `translate(${margin.left},${ - margin.bottom})`)
-    
+        .attr("transform", `translate(${margin.left},${margin.top})`)
 
     yAxisScale = d3
         .scaleLinear()
