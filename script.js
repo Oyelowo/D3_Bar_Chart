@@ -4,7 +4,7 @@ const loadData = async() => {
     req = await axios.get('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-d' +
             'ata.json');
     const dataset = req.data.data;
-
+    // console.log(dataset)
     const margin = {
         top: 40,
         right: 20,
@@ -20,6 +20,31 @@ const loadData = async() => {
     // note: barwidth has to be greater than barPadding;
 
     const gpdDates = dataset.map(d => d[0]);
+
+    const gdpYearsAndQuarters = gpdDates.map(d => {
+        let gdpMonth = d.slice(5, 7);
+        let gdpYear = d.slice(0, 4)
+        // console.log(gdpMonth)
+        let gdpQuarter = ""
+        switch (gdpMonth) {
+            case "01":
+                gdpQuarter = "Q1";
+                break;
+            case "04":
+                gdpQuarter = "Q2";
+                break;
+            case "07":
+                gdpQuarter = "Q3";
+                break;
+            case "10":
+                gdpQuarter = "Q4";
+                break;
+            default:
+                ''
+        }
+        return (gdpYear + "-" + gdpQuarter)
+    })
+
     const gdpYears = gpdDates.map(d => d.slice(0, 4));
     const gdpData = dataset.map(d => d[1]);
 
@@ -64,43 +89,29 @@ const loadData = async() => {
         .attr("fill", "lightgreen")
         .attr("class", "bar")
         .attr("transform", `translate(${margin.left},${margin.top})`)
-        .on("mouseover", function(d, i){
-            // barOverlay
-            //     .transition()
-            //     .duration(0)
-            //     .style("opacity", 0.8)
-            //     .style("height", yScale(d[1]) + "px")
-            //     .style("width", barwidth + "px")
-            //     .style("top", (height - yScale(d[1])) + "px")
-            //     .style("left", (i * barwidth) + "px")
-            //     .style("transform", `translate(${margin.left}px, ${margin.top}px)`);
+        .on("mouseover", function (d, i) {
+            // barOverlay     .transition()     .duration(0)     .style("opacity", 0.8)
+            // .style("height", yScale(d[1]) + "px")     .style("width", barwidth + "px")
+            // .style("top", (height - yScale(d[1])) + "px")     .style("left", (i *
+            // barwidth) + "px")     .style("transform", `translate(${margin.left}px,
+            // ${margin.top}px)`);
 
-                tooltip.transition()
+            tooltip
+                .transition()
                 .duration(200)
                 .style("opacity", 0.8)
 
+            tooltip.style("bottom", (margin.bottom) + "px").style("left", (i * barwidth) + "px").style("transform", `translate(${ 60}px, ${ - 100}px)`);
 
-                tooltip.style("bottom",  (margin.bottom ) + "px")
-                .style("left", (i * barwidth) + "px")
-                .style("transform", `translate(${60}px, ${-100}px)`);
+            tooltip.html(`${gdpYearsAndQuarters[i]} , ${gdpData[i]} Billion`)
 
-                tooltip.html("Tooltip")
-
-
-           
-                // barOverlay.html(d[1])
-                // .style("left", (event.pageX) + "px")
-                // .style("top", (event.pageY) + "px")
-
-                // d3.select(this).style("opacity", 0.5)
+            // barOverlay.html(d[1]) .style("left", (event.pageX) + "px") .style("top",
+            // (event.pageY) + "px") d3.select(this).style("opacity", 0.5)
         })
 
-        // barChart.transition()
-        // .attr("height", (d)=>yScale(d[1]))
-        // .attr("y", (d)=>height-yScale(d[1]))
-        // .duration(700)
-        // .delay((d,i=>i*100))
-        // .ease("elastic")
+    // barChart.transition() .attr("height", (d)=>yScale(d[1])) .attr("y",
+    // (d)=>height-yScale(d[1])) .duration(700) .delay((d,i=>i*100))
+    // .ease("elastic")
 
     yAxisScale = d3
         .scaleLinear()
