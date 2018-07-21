@@ -90,11 +90,6 @@ const loadData = async() => {
         .attr("class", "bar")
         .attr("transform", `translate(${margin.left},${margin.top})`)
         .on("mouseover", function (d, i) {
-            // barOverlay     .transition()     .duration(0)     .style("opacity", 0.8)
-            // .style("height", yScale(d[1]) + "px")     .style("width", barwidth + "px")
-            // .style("top", (height - yScale(d[1])) + "px")     .style("left", (i *
-            // barwidth) + "px")     .style("transform", `translate(${margin.left}px,
-            // ${margin.top}px)`);
 
             tooltip
                 .transition()
@@ -108,10 +103,9 @@ const loadData = async() => {
 
             tooltip.html(`${gdpYearsAndQuarters[i]} , ${gdpData[i]} Billion`)
 
-            // barOverlay.html(d[1]) .style("left", (event.pageX) + "px") .style("top",
-            // (event.pageY) + "px") d3.select(this).style("opacity", 0.5)
         }).on("mouseout", function(d,i){
             tooltip.transition()
+            .duration(200)
             .style("opacity", 0)
         })
 
