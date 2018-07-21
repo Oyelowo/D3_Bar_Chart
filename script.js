@@ -106,6 +106,9 @@ const loadData = async() => {
         .attr("id", "tooltip")
         .style("opacity", 0);
 
+    // y is set as height of the chart area to push all the bars to the bottom
+    // initially before the transition effect which pushes the bars up.  Initial
+    // height also 0 but set later in the barChart transition below.
     let barChart = svg
         .selectAll("rect")
         .data(dataset)
@@ -141,6 +144,7 @@ const loadData = async() => {
                 .style("opacity", 0)
         })
 
+    // Animations for bars
     barChart
         .transition()
         .attr("height", (d) => yScale(d[1]))
