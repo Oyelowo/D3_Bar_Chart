@@ -106,12 +106,6 @@ const loadData = async() => {
         .attr("id", "tooltip")
         .style("opacity", 0);
 
-    let barOverlay = d3
-        .select("#visBody")
-        .append("div")
-        .attr("class", "barOverlay")
-        .style("opacity", 0);
-
     let barChart = svg
         .selectAll("rect")
         .data(dataset)
