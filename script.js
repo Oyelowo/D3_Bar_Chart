@@ -75,7 +75,7 @@ const loadData = async() => {
         .attr("class", "barOverlay")
         .style("opacity", 0);
 
-    const barChart = svg
+    let barChart = svg
         .selectAll("rect")
         .data(dataset)
         .enter()
