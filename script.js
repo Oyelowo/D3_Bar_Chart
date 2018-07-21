@@ -101,12 +101,18 @@ const loadData = async() => {
                 .duration(200)
                 .style("opacity", 0.8)
 
-            tooltip.style("bottom", (margin.bottom) + "px").style("left", (i * barwidth) + "px").style("transform", `translate(${ 60}px, ${ - 100}px)`);
+            tooltip.style("bottom", (margin.bottom) + "px")
+            .style("left", (i * barwidth) + "px")
+            .style("transform", `translate(${ 60}px, ${ - 100}px)`)
+            .attr("data-date", d[0]);
 
             tooltip.html(`${gdpYearsAndQuarters[i]} , ${gdpData[i]} Billion`)
 
             // barOverlay.html(d[1]) .style("left", (event.pageX) + "px") .style("top",
             // (event.pageY) + "px") d3.select(this).style("opacity", 0.5)
+        }).on("mouseout", function(d,i){
+            tooltip.transition()
+            .style("opacity", 0)
         })
 
     // barChart.transition() .attr("height", (d)=>yScale(d[1])) .attr("y",
