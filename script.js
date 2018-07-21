@@ -98,10 +98,10 @@ const loadData = async() => {
 
             tooltip.style("bottom", (margin.bottom) + "px")
             .style("left", (i * barwidth) + "px")
-            .style("transform", `translate(${ 60}px, ${ - 100}px)`)
+            .style("transform", `translate(${ 60}px, ${ -100}px)`)
             .attr("data-date", d[0]);
 
-            tooltip.html(`${gdpYearsAndQuarters[i]} , ${gdpData[i]} Billion`)
+            tooltip.html(`${gdpYearsAndQuarters[i]}  $${gdpData[i].toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')} Billion`)
 
         }).on("mouseout", function(d,i){
             tooltip.transition()
