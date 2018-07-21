@@ -68,12 +68,22 @@ const loadData = async() => {
             barOverlay
                 .transition()
                 .duration(0)
-                .style("opacity", 1)
+                .style("opacity", 0.8)
                 .style("height", yScale(d[1]) + "px")
                 .style("width", barwidth + "px")
                 .style("top", (height - yScale(d[1])) + "px")
                 .style("left", (i * barwidth) + "px")
-                .style("transform", `translate(${margin.left}px, ${margin.top}px)`)
+                .style("transform", `translate(${margin.left}px, ${margin.top}px)`);
+
+                tooltip.transition()
+                .duration(200)
+                .style("opacity", 0.8)
+
+
+                tooltip.style("bottom",  (margin.bottom + 100) + "px")
+                .style("left", (i * barwidth) + "px")
+                .style("transform", `translate(${margin.left}px, ${margin.top}px)`);
+
 
                 // barOverlay.html(d[1])
                 // .style("left", (event.pageX) + "px")
