@@ -63,56 +63,6 @@ const loadData = async() => {
         .attr("height", svgHeight)
         .style("background", "#eaeaea");
 
-    let tooltip = d3
-        .select("#visBody")
-        .append('div')
-        .attr("id", "tooltip")
-        .style("opacity", 0);
-
-    let barOverlay = d3
-        .select("#visBody")
-        .append("div")
-        .attr("class", "barOverlay")
-        .style("opacity", 0);
-
-    let barChart = svg
-        .selectAll("rect")
-        .data(dataset)
-        .enter()
-        .append("rect")
-        .attr("data-date", (d) => d[0])
-        .attr("data-gdp", (d) => d[1])
-        .attr("x", (d, i) => i * barwidth)
-        .attr("y", (d) => height - yScale(d[1]))
-        .attr("width", barwidth - barPadding)
-        .attr("height", (d) => yScale(d[1]))
-        .attr("fill", "lightgreen")
-        .attr("class", "bar")
-        .attr("transform", `translate(${margin.left},${margin.top})`)
-        .on("mouseover", function (d, i) {
-
-            tooltip
-                .transition()
-                .duration(200)
-                .style("opacity", 0.8)
-
-            tooltip.style("bottom", (margin.bottom) + "px")
-            .style("left", (i * barwidth) + "px")
-            .style("transform", `translate(${ 60}px, ${ -100}px)`)
-            .attr("data-date", d[0]);
-
-            tooltip.html(`${gdpYearsAndQuarters[i]}  $${gdpData[i].toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')} Billion`)
-
-        }).on("mouseout", function(d,i){
-            tooltip.transition()
-            .duration(200)
-            .style("opacity", 0)
-        })
-
-    // barChart.transition() .attr("height", (d)=>yScale(d[1])) .attr("y",
-    // (d)=>height-yScale(d[1])) .duration(700) .delay((d,i=>i*100))
-    // .ease("elastic")
-
     yAxisScale = d3
         .scaleLinear()
         .domain([0, gdpMax])
@@ -149,6 +99,61 @@ const loadData = async() => {
         .attr("id", "x-axis")
         .attr("transform", `translate(${margin.left}, ${xAxisTranslate})`)
         .call(xAxis)
+
+    let tooltip = d3
+        .select("#visBody")
+        .append('div')
+        .attr("id", "tooltip")
+        .style("opacity", 0);
+
+    let barOverlay = d3
+        .select("#visBody")
+        .append("div")
+        .attr("class", "barOverlay")
+        .style("opacity", 0);
+
+    let barChart = svg
+        .selectAll("rect")
+        .data(dataset)
+        .enter()
+        .append("rect")
+        .attr("data-date", (d) => d[0])
+        .attr("data-gdp", (d) => d[1])
+        .attr("x", (d, i) => i * barwidth)
+        .attr("y", height)
+        .attr("width", barwidth - barPadding)
+        .attr("height", "0")
+        .attr("fill", "lightgreen")
+        .attr("class", "bar")
+        .attr("transform", `translate(${margin.left},${margin.top})`)
+        .on("mouseover", function (d, i) {
+
+            tooltip
+                .transition()
+                .duration(200)
+                .style("opacity", 0.8)
+
+            tooltip.style("bottom", (margin.bottom) + "px").style("left", (i * barwidth) + "px")
+                .style("transform", `translate(${ 60}px, ${ - 100}px)`)
+                .attr("data-date", d[0]);
+
+            tooltip.html(`${gdpYearsAndQuarters[i]}  $${gdpData[i].toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')} Billion`)
+
+        })
+        .on("mouseout", function (d, i) {
+            tooltip
+                .transition()
+                .duration(200)
+                .style("opacity", 0)
+        })
+
+    barChart
+        .transition()
+        .attr("height", (d) => yScale(d[1]))
+        .attr("y", (d) => height - yScale(d[1]))
+        .duration(700)
+        .delay((d, i => i * 100))
+        .ease("elastic")
 
 }
 
