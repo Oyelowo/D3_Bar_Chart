@@ -56,6 +56,8 @@ body {
   position: absolute;
   box-shadow: var(--myShadow);
   text-align: center;
+  font-weight: bolder;
+  font-size: 1rem;
 }
 
 .barOverlay {

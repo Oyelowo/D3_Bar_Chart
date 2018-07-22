@@ -3,7 +3,7 @@
          req = await axios.get('https://raw.githubusercontent.com/freeCodeCamp/ProjectReferenceData/master/GDP-d' +
              'ata.json');
          const dataset = req.data.data;
-         // console.log(dataset)
+
          const margin = {
              top: 40,
              right: 20,
@@ -23,7 +23,7 @@
          const gdpYearsAndQuarters = gpdDates.map(d => {
              let gdpMonth = d.slice(5, 7);
              let gdpYear = d.slice(0, 4)
-             // console.log(gdpMonth)
+
              let gdpQuarter = ""
              switch (gdpMonth) {
                  case "01":
@@ -158,10 +158,10 @@
                      .style("opacity", 0.8)
 
                  tooltip.style("bottom", (margin.bottom) + "px").style("left", (i * barwidth) + "px")
-                     .style("transform", `translate(${ 100}px, ${ - 100}px)`)
+                     .style("transform", `translate(${ 100}px, ${ -140}px)`)
                      .attr("data-date", d[0]);
 
-                 tooltip.html(`${gdpYearsAndQuarters[i]}  $${gdpData[i].toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')} Billion`)
+                 tooltip.html(`${gdpYearsAndQuarters[i]} <br>  $${gdpData[i].toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')} Billion`)
 
              })
              .on("mouseout", function (d, i) {
