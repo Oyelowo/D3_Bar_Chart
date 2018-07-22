@@ -67,6 +67,8 @@ const loadData = async() => {
     svg
         .append("text")
         .attr('transform', 'rotate(-90)')
+        .attr("font-size", '20px')
+        .attr("font-weight", "bolder")
         .text("Gross Domestic Product (Billions)")
         .attr("x", -height + 100)
         .attr("y", 26)
@@ -75,6 +77,8 @@ const loadData = async() => {
     // X axis label
     svg
         .append("text")
+        .attr("font-size", '20px')
+        .attr("font-weight", "bolder")
         .text("Date")
         .attr("x", width / 2)
         .attr("y", height + margin.bottom + 20)
@@ -144,7 +148,7 @@ const loadData = async() => {
         .attr("y", height)
         .attr("width", barwidth - barPadding)
         .attr("height", "0")
-        .attr("fill", "#66bb6a")
+        .attr("fill", "#9ccc65")
         .attr("class", "bar")
         .attr("transform", `translate(${margin.left},${margin.top})`)
         .on("mouseover", function (d, i) {

@@ -6,9 +6,18 @@ body {
   background: #eaeaea;
 }
 
-text,
-.bar {
+#title {
   text-shadow: var(--myShadow);
+  text-align: center;
+  position: relative;
+  top: 4%;
+  z-index: 1000;
+  font-size: 2rem;
+}
+
+#y-axis, #x-axis{
+  text-shadow: var(--myShadow);
+  font-size: 0.8rem;
 }
 
 .bar:hover {
@@ -26,15 +35,6 @@ text,
   fill: brown;
 }
 
-#title {
-  text-shadow: var(--myShadow);
-  text-align: center;
-  position: relative;
-  top: 4%;
-  z-index: 1000;
-  font-size: 2rem;
-}
-
 #visBody {
   position: absolute;
 }
@@ -42,10 +42,12 @@ text,
 #tooltip {
   height: 60px;
   width: 120px;
-  background: #eaeaea;
-  color: black;
+  background: #8e8eb8;
+  color: #eaeaea;
+  padding: 10px;
   position: absolute;
   box-shadow: var(--myShadow);
+  text-align: center;
 }
 
 .barOverlay {
