@@ -35,16 +35,13 @@ body {
 #visContainer {
   position: relative;
   width: 900px;
-  height: 100vh;
+  min-height: 100vh;
   margin: auto;
   box-shadow: var(--myShadow);
   background: #eaeaea;
   color: brown;
   fill: brown;
-}
-
-#visBody {
-  /* position: absolute; */
+  padding: 10x;
 }
 
 #tooltip {
@@ -68,4 +65,13 @@ body {
 footer {
   text-align: center;
   text-shadow: var(--myShadow);
+  font-size: 1.3rem;
+}
+
+footer a {
+  text-decoration: none;
+}
+
+footer a:hover {
+  opacity: 0.8;
 }
