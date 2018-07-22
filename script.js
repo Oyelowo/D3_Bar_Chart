@@ -9,10 +9,10 @@ const loadData = async() => {
         top: 40,
         right: 20,
         bottom: 60,
-        left: 50
+        left: 80
     };
     const svgWidth = 900,
-        svgHeight = 500,
+        svgHeight = 600,
         barPadding = 0;
     const width = svgWidth - margin.left - margin.right;
     const height = svgHeight - margin.top - margin.bottom;
@@ -62,6 +62,30 @@ const loadData = async() => {
         .attr("width", svgWidth)
         .attr("height", svgHeight)
         .style("background", "#eaeaea");
+
+    // Y axis label
+    svg
+        .append("text")
+        .attr('transform', 'rotate(-90)')
+        .text("Gross Domestic Product (Billions)")
+        .attr("x", -height + 100)
+        .attr("y", 26)
+        .attr("font-size", "17")
+
+    // X axis label
+    svg
+        .append("text")
+        .text("Date")
+        .attr("x", width / 2)
+        .attr("y", height + margin.bottom + 20)
+
+    svg
+        .append("text")
+        .text("'More Information: http://www.bea.gov/national/pdf/nipaguid.pdf'")
+        .attr("x", (width / 2) + 50)
+        .attr("y", height + margin.bottom + 30)
+        .attr("font-style", "italic")
+        .attr("fill", "blue")
 
     yAxisScale = d3
         .scaleLinear()
@@ -120,7 +144,7 @@ const loadData = async() => {
         .attr("y", height)
         .attr("width", barwidth - barPadding)
         .attr("height", "0")
-        .attr("fill", "lightgreen")
+        .attr("fill", "#66bb6a")
         .attr("class", "bar")
         .attr("transform", `translate(${margin.left},${margin.top})`)
         .on("mouseover", function (d, i) {
@@ -131,7 +155,7 @@ const loadData = async() => {
                 .style("opacity", 0.8)
 
             tooltip.style("bottom", (margin.bottom) + "px").style("left", (i * barwidth) + "px")
-                .style("transform", `translate(${ 60}px, ${ - 100}px)`)
+                .style("transform", `translate(${ 100}px, ${ - 100}px)`)
                 .attr("data-date", d[0]);
 
             tooltip.html(`${gdpYearsAndQuarters[i]}  $${gdpData[i].toFixed(1).replace(/(\d)(?=(\d{3})+\.)/g, '$1,')} Billion`)
