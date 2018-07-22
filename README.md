@@ -1,4 +1,4 @@
 # D3_Bar_Chart
 
 [Demo Live here!](https://oyelowo.github.io/D3_Bar_Chart/)
-![D3.js Bar Chart Screenshot]("Oyelowo/D3_Bar_Chart/favicon.ico")
+![D3.js Bar Chart Screenshot](https://oyelowo.github.io/D3_Bar_Chart//favicon.ico)
