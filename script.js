@@ -178,8 +178,8 @@ const loadData = async() => {
         .attr("height", (d) => yScale(d[1]))
         .attr("y", (d) => height - yScale(d[1]))
         .duration(700)
-        .delay((d, i => i * 100))
-        .ease("elastic")
+        .delay((d, i) => i * 3)
+        .ease(d3.easeElastic)
 
 }
 

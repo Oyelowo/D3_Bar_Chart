@@ -15,9 +15,17 @@ body {
   font-size: 2rem;
 }
 
-#y-axis, #x-axis{
+#y-axis,
+#x-axis {
   text-shadow: var(--myShadow);
   font-size: 0.8rem;
+}
+
+#y-axis path,
+#x-axis path {
+  stroke: black;
+  stroke-width: 1;
+  fill: none;
 }
 
 .bar:hover {
@@ -36,7 +44,7 @@ body {
 }
 
 #visBody {
-  position: absolute;
+  /* position: absolute; */
 }
 
 #tooltip {
@@ -56,11 +64,6 @@ body {
 }
 
 footer {
-  z-index: 20000;
+  text-align: center;
+  text-shadow: var(--myShadow);
 }
-
-/* #y-axis path, #x-axis path{
-    stroke: black;
-  stroke-width: 1;
-  fill: none; 
-} */
