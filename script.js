@@ -12,7 +12,7 @@ const loadData = async() => {
         left: 80
     };
     const svgWidth = 900,
-        svgHeight = 600,
+        svgHeight = 500,
         barPadding = 0;
     const width = svgWidth - margin.left - margin.right;
     const height = svgHeight - margin.top - margin.bottom;
