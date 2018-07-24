@@ -120,11 +120,11 @@
              .attr("id", "y-axis")
              .attr("transform", `translate(${margin.left}, ${margin.top})`)
 
-         const xAxisTranslate = svgHeight - margin.bottom;
+         const xAxisTranslateY = svgHeight - margin.bottom;
          svg
              .append("g")
              .attr("id", "x-axis")
-             .attr("transform", `translate(${margin.left}, ${xAxisTranslate})`)
+             .attr("transform", `translate(${margin.left}, ${xAxisTranslateY})`)
              .call(xAxis)
 
          let tooltip = d3
